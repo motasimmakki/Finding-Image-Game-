@@ -1,0 +1,112 @@
+<!DOCTYPE html><!-- Motasim's Image Game Project! -->
+<html>
+<head>
+	<title>IMAGE-GAME</title>
+	<!-- <script src="jQuery.js"></script> -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+		
+			var images=['srk','me','sk','shk','ak','sd','nzs','sak',],n=8;	
+			var count=0,score=0;
+
+			function getRandom(){
+				var randomIndex=Math.floor(Math.random()*n);
+				n--;
+				var temp=images[randomIndex];
+				images[randomIndex]=images[images.length-1];
+				images[images.length-1]=temp;
+
+				return images.pop();
+			}
+
+			$('.img').on('click','img',function(){
+				if(($(this).closest('img').attr("src")=='black.jpg')){
+					$(this).closest('img').attr("src",getRandom()+'.jpg');
+					count++;
+					$('#count').find('span').text(count);
+					if(($(this).closest('img').attr("src")=='me.jpg')){
+						score=10;
+						$('#score').find('span').text(score);
+					}
+				}
+				if(score==10){
+					setTimeout(function(){
+						$('.status').find('h1').text('YOU WON THE GAME !');
+						$('.status').addClass('game-over');
+					},500);
+				}
+				else if(count==4){
+					setTimeout(function(){
+						$('.status').find('h1').text('YOU LOOSE, GAME OVER!');
+						$('.status').addClass('game-over');
+					},500);
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="score-box">
+		<div class="box" id="score">
+			<h1>SCORE : <span>0</span></h1>
+		</div>
+
+		<img src="me.jpg" class="me">
+		<span class="game-title">FIND *ME*[4-Chance]</span>
+
+		<div class="box" id="count">
+			<h1>COUNT : <span>0</span></h1>
+		</div>
+	</div>
+	<div class="img-box">
+		<ul>
+			<li>
+				<div class="img" id="img-1">
+					<img src="black.jpg">
+				</div>
+			</li>
+			<li>
+				<div class="img" id="img-2">
+					<img src="black.jpg">
+				</div>
+			</li>
+			<li>
+				<div class="img" id="img-3">
+					<img src="black.jpg">
+				</div>
+			</li>
+			<li>
+				<div class="img" id="img-4">
+					<img src="black.jpg">
+				</div>
+			</li>
+			<li>
+				<div class="img" id="img-5">
+					<img src="black.jpg">
+				</div>
+			</li>
+			<li>
+				<div class="img" id="img-6">
+					<img src="black.jpg">
+				</div>
+			</li>
+			<li>
+				<div class="img" id="img-7">
+					<img src="black.jpg">
+				</div>
+			</li>
+			<li>
+				<div class="img" id="img-8">
+					<img src="black.jpg">
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="status">
+		<h1></h1>
+	</div>
+</body>
+</html>
